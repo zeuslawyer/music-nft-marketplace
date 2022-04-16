@@ -14,10 +14,14 @@ async function main() {
   );
   const nftMarketplace = await MusicNFTMarketplaceFactory.deploy();
 
+  await nftMarketplace.deployed();
+
   console.log(
-    `Deployed contract at address ${
-      nftMarketplace.address
-    } and with token name ${await nftMarketplace.functions.name()} and symbol ${await nftMarketplace.functions.symbol()}`
+    `Deployed contract details: 
+    contract address : ${nftMarketplace.address} 
+    deployed by account: ${deployer.address}
+    token name : ${await nftMarketplace.functions.name()}
+    symbol : ${await nftMarketplace.functions.symbol()}`
   );
 
   // For each contract, pass the deployed contract and name to this function to save a copy of the contract ABI and address to the front end.
@@ -47,7 +51,7 @@ function saveABItoFrontend(contract, name) {
 
 main()
   .then(() => process.exit(0))
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });
